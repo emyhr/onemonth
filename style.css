@@ -1,0 +1,267 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+}
+
+#snowCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Behind everything */
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 1.5s ease-out;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-top: 1rem;
+    animation: fadeInUp 1.5s ease-out 0.5s both;
+}
+
+/* --- THE SCENE --- */
+.scene {
+    position: relative;
+    width: 400px;
+    /* Slightly wider for images */
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    filter: blur(4px);
+}
+
+.couple {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+/* --- CHARACTERS (IMAGES) --- */
+.person {
+    position: relative;
+    width: 120px;
+    /* Adjust based on image aspect ratio? Assuming roughly square or portrait */
+    height: 180px;
+    margin: 0 20px;
+    /* Start apart -> animate closing the gap */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.person img {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: auto;
+}
+
+.img-normal {
+    opacity: 1;
+    z-index: 1;
+    animation: fadeOutNormal 0.3s ease-out 2.5s forwards;
+    /* Fade out when they meet */
+}
+
+/* Single kissing couple image */
+.kissing-couple {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    /* Adjust based on your image size */
+    height: 180px;
+    opacity: 0;
+    z-index: 12;
+    /* Between boy and girl layers */
+    animation: fadeInKissing 0.3s ease-in 2.5s forwards;
+}
+
+.kissing-couple img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.boy {
+    /* Initial state, animate to center */
+    animation: boyMove 3s ease-in-out forwards;
+    z-index: 15;
+    /* Boy on top */
+}
+
+.girl {
+    /* Initial state, animate to center */
+    animation: girlMove 3s ease-in-out forwards;
+    z-index: 10;
+    /* Girl behind boy */
+}
+
+/* --- HEART KISS --- */
+.heart-kiss {
+    position: absolute;
+    font-size: 4rem;
+    bottom: 150px;
+    /* Higher up */
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    z-index: 20;
+    animation: heartPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2.6s forwards, heartFloat 1.5s ease-in-out 3.2s infinite;
+}
+
+/* --- ANIMATIONS --- */
+
+/* Move closer. 
+   Assuming images are facing each other in the files? 
+   If not, might need scaleX(-1) on one. 
+   Usually "boy" faces right, "girl" faces left? 
+   Let's assume provided images are correct orientation. 
+*/
+
+@keyframes boyMove {
+    0% {
+        transform: translateX(0);
+    }
+
+    70% {
+        transform: translateX(45px);
+    }
+
+    /* Approach */
+    100% {
+        transform: translateX(50px);
+    }
+
+    /* Kiss position */
+}
+
+@keyframes girlMove {
+    0% {
+        transform: translateX(0);
+    }
+
+    70% {
+        transform: translateX(-45px);
+    }
+
+    /* Approach */
+    100% {
+        transform: translateX(-50px);
+    }
+
+    /* Kiss position */
+}
+
+@keyframes fadeOutNormal {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInKissing {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes heartPop {
+    0% {
+        transform: translateX(-50%) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.1) translateY(-10px);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
