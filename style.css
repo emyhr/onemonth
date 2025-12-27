@@ -24,6 +24,10 @@ body {
     height: 100%;
     z-index: 1;
     /* Behind everything */
+    opacity: 0;
+    /* Start invisible */
+    animation: fadeInSnow 2s ease-in 2.5s forwards;
+    /* Fade in slowly after kiss */
 }
 
 .container {
@@ -166,6 +170,11 @@ body {
    Usually "boy" faces right, "girl" faces left? 
    Let's assume provided images are correct orientation. 
 */
+@keyframes fadeInSnow {
+    to {
+        opacity: 1;
+    }
+}
 
 @keyframes boyMove {
     0% {

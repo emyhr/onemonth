@@ -52,7 +52,7 @@ function initSnow() {
     for (let i = 0; i < snowflakeCount; i++) {
         const flake = new Snowflake();
         // Scatter initially so they don't all start at top
-        flake.y = Math.random() * height; 
+        flake.y = Math.random() * -height;
         snowflakes.push(flake);
     }
 }
@@ -68,5 +68,8 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-initSnow();
+setTimeout(() => {
+    isSnowing = true;
+    initSnow();
+}, 3000);
 animate();
