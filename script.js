@@ -71,5 +71,5 @@ function animate() {
 setTimeout(() => {
     isSnowing = true;
     initSnow();
-}, 3000);
+}, 2000);
 animate();

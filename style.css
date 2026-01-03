@@ -42,18 +42,37 @@ body {
 
 .title {
     font-family: 'Pacifico', cursive;
-    font-size: 3.5rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin: 0 2rem 2rem 2rem;
+    color: #FFF8E7;
+    opacity: 0;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    animation: fadeInDown 1.5s ease-out;
+
+    /* 1. Fade in starts at 4s, ends at 6.5s */
+    /* 2. Glow starts at 6.5s, ends at 8.5s (stays bright) */
+    animation:
+        fadeIn 2.5s ease-out 4s forwards,
+        glowIn 2s ease-out 6s forwards;
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin-top: 1rem;
-    animation: fadeInUp 1.5s ease-out 0.5s both;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    color: #FFF8E7;
+    letter-spacing: 1px;
+
+    /* Starting state */
+    opacity: 0;
+    transform: translateY(5px);
+    /* Very small movement to prevent "stuck" feeling */
+
+    /* We use 'ease-in-out' for a more organic feel */
+    animation: smoothFadeUp 3s ease-in-out 7s forwards;
 }
+
+/* To ensure it doesn't look too thick, you can add a slight blur 
+   or keep the opacity just a tiny bit lower than the title. */
 
 /* --- THE SCENE --- */
 .scene {
@@ -251,18 +270,33 @@ body {
     }
 }
 
-@keyframes fadeInDown {
+/* --- THE GLOW KEYFRAMES --- */
+@keyframes glowIn {
+    from {
+        text-shadow: 0 0 0px rgba(255, 215, 0, 0);
+    }
+
+    to {
+        /* Warm cafe-bulb final state */
+        text-shadow:
+            0 0 15px rgba(255, 255, 255, 0.7),
+            0 0 25px rgba(255, 215, 0, 0.9),
+            0 0 45px rgba(255, 165, 0, 0.5);
+    }
+}
+
+/* Standard Fade In */
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
+/* Fade In and Move Up */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -271,6 +305,19 @@ body {
 
     to {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes smoothFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    100% {
+        opacity: 0.8;
+        /* Slightly transparent makes it look more "elegant" */
         transform: translateY(0);
     }
 }
