@@ -45,7 +45,7 @@ body {
 .title {
     font-family: 'Pacifico', cursive;
     font-size: 2rem;
-    margin: 0 2rem 2rem 2rem;
+    margin: 0 1.5rem 2rem 1.5rem;
     color: #FFF8E7;
     opacity: 0;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -60,7 +60,7 @@ body {
 .subtitle {
     font-family: 'Pacifico', cursive;
     font-size: 1.5rem;
-    margin-top: 1.5rem;
+    margin: 1rem 1.5rem 1rem 1.5rem;
     color: #FFF8E7;
     letter-spacing: 1px;
 
@@ -81,7 +81,7 @@ body {
     position: relative;
     width: 400px;
     /* Slightly wider for images */
-    height: 200px;
+    height: 220px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
